@@ -1,6 +1,6 @@
 % Pass this function a 3D or 2D uint8/16 data struct of a video volume (imArray).
 %Allows you to manually select ROIs based on maximum values for each pixel in data.
-% 6/4/21 UPDATE: Switch the definition of ix and iy on line 79. For proper use for non-square images. 
+% 6/4/21 UPDATE: For proper use for non-square images. 
 
 function CellList = SemiSeg(imArray, inputCellList) 
     %Start up
@@ -77,7 +77,7 @@ function CellList = SemiSeg(imArray, inputCellList)
                     cx=xList(inputs); cy=yList(inputs); iy=size(singleFrame,1); ix=size(singleFrame,2); r=6; % R gives cicle size
                     [x,y]=meshgrid(-(cx-1):(ix-cx),-(cy-1):(iy-cy));
                     c_mask=((x.^2+y.^2)<=r^2);
-                    [b,~,~,~] = bwboundaries(c_mask);1
+                    [b,~,~,~] = bwboundaries(c_mask);
                     circ = plot(b{1}(:,2),b{1}(:,1),'g'); %Plot for visualization
                     %Add to output structure
                     CC = bwconncomp(c_mask); 
